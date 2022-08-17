@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        img{width: 100px;}
+        body {max-width: 400px; margin: auto;}
+
+        #split{ display: flex; justify-content: space-around;  background: lightblue;}
+        #split1{display: flex; justify-content: space-around; background: lightcyan;}
+        button{background: #000; color: #fff; padding: 5px 10px; border-radius: 5px; margin-left: 50px; margin-top: 10px;}
+    </style>
+
+    <title>Scissors, Paper, Rock</title>
+</head>
+
+<body>
+    <div id="split">
+    <img src="https://mpng.subpng.com/20190605/zza/kisspng-clip-art-paper-scissors-portable-network-graphics-the-science-of-intuition-from-a-future-rock-paper-5cf85b59d367b1.9574751515597801858659.jpg" />
+    <p>Total Count: <span id="disp">0</span></p>
+</div>
+    <div id="split1">
+        
+        <div>
+            <h3>CPU: <span id="cpu_display"></span></h3>
+            <h3>USER: <span id="user_display"></span></h3>
+            <h4>Result: <span id="result"></span></h4>
+        </div>
+        <div>
+            <h4>CPU WIN: <span id="cwin"></span> </h4>
+            <h4>USER WIN: <span id="uwin"></span> </h4>
+            <h4>Draw: <span id="draw"></span> </h4>
+        </div>
+
+    </div>
+    <button id="Rock">Rock</button>
+    <button id="Scissor">Scissor</button>
+    <button id="Paper">Paper</button>
+
+    <script>
+        let Cpudisplay = document.getElementById('cpu_display');
+        let Userdisplay = document.getElementById('user_display');
+        let result = document.getElementById('result');
+
+        let possible = document.querySelectorAll('button');
+
+        let A = "Tied", B = "USER WON", C = "CPU WON"
+
+        var count = 0;
+        let display = document.getElementById('disp');
+        let Draw = document.getElementById('draw');
+        let cpuwin = document.getElementById('cwin');
+        let userwin = document.getElementById('uwin');
+        var equal = 0;
+        var Cwin = 0;
+        var Uwin = 0;
+       
+        possible.forEach(x => x.addEventListener("click", (e) => {    
+            user = e.target.id
+            Userdisplay.innerHTML = user
+            count++;
+            display.innerHTML = count;
+            CPU_choice();
+            Display_result();
+            alerting();
+        }))
+
+        const CPU_choice = ()=> {
+
+            const random = ['Scissor', 'Paper', 'Rock'];
+            let output = random[Math.floor(Math.random() * random.length)];
+            Cpudisplay.innerHTML = output;
+        }
+
+        const Display_result = ()=> {
+           
+            if (Userdisplay.innerHTML === Cpudisplay.innerHTML) {
+                result.innerHTML = "Tied";
+                equal++;
+                Draw.innerHTML = equal;
+            }
+
+
+            if (Userdisplay.innerText === "Rock" && Cpudisplay.innerText === "Paper") {
+                result.innerHTML = C;
+                Cwin++;
+                cpuwin.innerHTML = Cwin;
+            }
+
+
+            if (Userdisplay.innerText === "Rock" && Cpudisplay.innerText === "Scissor") {
+                result.innerHTML = B;
+                Uwin++;
+                userwin.innerHTML = Uwin;
+            }
+
+
+            if (Userdisplay.innerText === "Scissor" && Cpudisplay.innerText === "Paper") {
+                result.innerHTML = B;
+                Uwin++;
+                userwin.innerHTML = Uwin;
+            }
+
+
+            if (Userdisplay.innerText === "Scissor" && Cpudisplay.innerText === "Rock") {
+                result.innerHTML = C;
+                Cwin++;
+                cpuwin.innerHTML = Cwin;
+            }
+
+
+            if (Userdisplay.innerText === "Paper" && Cpudisplay.innerText === "Scissor") {
+                result.innerHTML = C;
+                Cwin++;
+                cpuwin.innerHTML = Cwin;
+            }
+
+
+            if (Userdisplay.innerText === "Paper" && Cpudisplay.innerText === "Rock") {
+                result.innerHTML = B;
+                Uwin++;
+                userwin.innerHTML = Uwin;
+            }
+
+
+        }
+
+        const alerting = ()=> {
+            // if(cpuwin.innerHTML==="3" || userwin.innerHTML==="3")
+            // {
+            //     alert("Game over !!");  
+            // }
+
+            if(cpuwin.innerHTML==="3")
+            {
+                alert("CPU wins!!")
+                window.location.reload();
+            }
+
+            else if(userwin.innerHTML==="3")
+            {
+                alert("User wins!!");
+                window.location.reload();
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
